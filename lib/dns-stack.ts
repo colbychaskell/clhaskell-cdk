@@ -12,7 +12,7 @@ export class DnsStack extends Stack {
   public readonly hostedZone: route53.IHostedZone;
   public readonly crossAccountRole: iam.Role;
 
-  private constructor(scope: Construct, id: string, props: DnsStackProps) {
+  constructor(scope: Construct, id: string, props: DnsStackProps) {
     super(scope, id, props);
 
     this.hostedZone = new route53.PublicHostedZone(this, "RootHostedZone", {

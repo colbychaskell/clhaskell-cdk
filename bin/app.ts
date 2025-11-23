@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
-import { DnsStack } from "stacks/dns-stack";
-import { WebsiteStack } from "stacks/static-website-stack";
+import { DnsStack } from "../lib/dns-stack";
+import { StaticWebsiteStack } from "../lib/static-website-stack";
 
 const app = new cdk.App();
 
@@ -53,7 +53,7 @@ const dnsStack = new DnsStack(app, "DnsStack", {
 });
 
 // Deploy Beta Website Stack to Beta Account
-const betaStack = new WebsiteStack(app, "BetaWebsiteStack", {
+const betaStack = new StaticWebsiteStack(app, "BetaStaticWebsiteStack", {
   env: {
     account: config.betaAccount,
     region: config.region,
@@ -66,7 +66,7 @@ const betaStack = new WebsiteStack(app, "BetaWebsiteStack", {
 });
 
 // Deploy Gamma Website Stack to Gamma Account
-const gammaStack = new WebsiteStack(app, "GammaWebsiteStack", {
+const gammaStack = new StaticWebsiteStack(app, "GammaStaticWebsiteStack", {
   env: {
     account: config.gammaAccount,
     region: config.region,
@@ -80,7 +80,7 @@ const gammaStack = new WebsiteStack(app, "GammaWebsiteStack", {
 
 // Deploy Production Website Stack to Prod Account
 // Production uses the root domain (no subdomain prefix)
-const prodStack = new WebsiteStack(app, "ProdWebsiteStack", {
+const prodStack = new StaticWebsiteStack(app, "ProdStaticWebsiteStack", {
   env: {
     account: config.prodAccount,
     region: config.region,
